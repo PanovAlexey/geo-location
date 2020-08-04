@@ -12,5 +12,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__ . './routes/geo-location.php');
+
+        $this->publishes([
+            __DIR__ . './config/geolocation.php' => config_path('geolocation.php'),
+            'geolocation-config'
+        ]);
+        $this->mergeConfigFrom(__DIR__ . 'config/geolocation.php', 'geolocation');
     }
- }
+}
