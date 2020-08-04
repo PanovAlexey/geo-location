@@ -1,0 +1,24 @@
+{
+    "name": "codeblog.pro/laravel-geo-location",
+    "description": "The package allows you to get the location of the user by his IP. The package provides the ability to use several services at the same time to increase accuracy and to increase free limits.",
+    "keywords": [
+        "api", "wrapper", "geo", "geo-location", "coordinates", "geographical-coordinates"
+    ],
+    "homepage": "https://github.com/PanovAlexey/geo-location",
+    "type": "library",
+    "license": "Mozilla Public License Version 2.0",
+    "authors": [
+        {
+            "name": "Panov Alexey",
+            "email": "panov@codeblog.pro",
+            "homepage": "https://codeblog.pro/",
+            "role": "Owner"
+        }
+    ],
+    "require": {
+        "php" : ">=7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5.2"
+    }
+}
