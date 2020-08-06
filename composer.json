@@ -26,5 +26,12 @@
         "psr-4": {
             "CodeblogPro\\GeoLocation\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\CodeblogPro\\GeoLocation\\ServiceProvider"
+            ]
+        }
     }
 }
