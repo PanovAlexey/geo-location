@@ -6,7 +6,7 @@
     ],
     "homepage": "https://github.com/PanovAlexey/geo-location",
     "type": "library",
-    "license": "Mozilla Public License Version 2.0",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Panov Alexey",
