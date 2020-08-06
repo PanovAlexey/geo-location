@@ -1,13 +1,13 @@
 language: php
 
 php:
-  - 7.3
+  - 7.4
 
 install:
   - composer install
 
 script:
-  - phpunit --coverage-clover=coverage.clover
+  - vendor/bin/phpunit --coverage-clover=coverage.clover
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
