@@ -29,6 +29,11 @@
             "CodeblogPro\\GeoLocation\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "CodeblogPro\\GeoLocation\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
