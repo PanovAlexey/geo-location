@@ -32,7 +32,7 @@ class DaDataResolverTest extends TestCase
     function testGetLocation_incorrectIp_IncorrectIpException(): void
     {
         $this->expectException(IncorrectIpException::class);
-        $daDataResolver = new DaDataResolver($this->getDefaultLanguage(), $this->getIncorrectIp());
+        $daDataResolver = new DaDataResolver($this->getIncorrectIp(), $this->getDefaultLanguage());
         $daDataResolver->getLocation();
     }
 
