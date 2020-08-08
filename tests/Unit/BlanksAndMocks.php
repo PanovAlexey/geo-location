@@ -19,6 +19,11 @@ class BlanksAndMocks
         return 'en';
     }
 
+    public static function getRuLanguageCode(): string
+    {
+        return 'ru';
+    }
+
     public static function getDefaultLanguage(): string
     {
         return self::getEnLanguageCode();

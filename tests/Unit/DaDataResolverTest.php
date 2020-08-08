@@ -14,4 +14,16 @@ class DaDataResolverTest extends TestCase
         $daDataResolver = new DaDataResolver(BlanksAndMocks::getIncorrectIp(), BlanksAndMocks::getDefaultLanguage());
         $daDataResolver->getLocation();
     }
+
+    public function testGetResultLanguage_defaultLanguage_ShouldReturnDefaultLanguage(): void
+    {
+        $daDataResolver = new DaDataResolver(BlanksAndMocks::getCorrectIp(), BlanksAndMocks::getDefaultLanguage());
+        $this->assertSame($daDataResolver->getResultLanguage(), BlanksAndMocks::getDefaultLanguage());
+    }
+
+    public function testGetResultLanguage_ruLanguage_ShouldReturnRuLanguage(): void
+    {
+        $daDataResolver = new DaDataResolver(BlanksAndMocks::getCorrectIp(), BlanksAndMocks::getRuLanguageCode());
+        $this->assertSame($daDataResolver->getResultLanguage(), BlanksAndMocks::getRuLanguageCode());
+    }
 }
