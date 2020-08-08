@@ -3,10 +3,10 @@
 namespace CodeblogPro\GeoLocation\Application\Interfaces;
 
 /**
- * Interface GetLocationServiceInterface
+ * Interface GeoLocationServiceInterface
  * @package CodeblogPro\GeoLocation\Application\Interfaces
  */
-interface GetLocationServiceInterface
+interface GeoLocationServiceInterface
 {
     public function __construct(string $ip, string $language);
 
