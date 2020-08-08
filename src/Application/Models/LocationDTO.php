@@ -24,12 +24,12 @@ class LocationDTO implements LocationInterface
         string $regionIso,
         CoordinatesInterface $coordinates
     ) {
-        $this->country = $country;
-        $this->region = $region;
-        $this->city = $city;
-        $this->postal = $postal;
-        $this->countryIso = $countryIso;
-        $this->regionIso = $regionIso;
+        $this->country = trim($country);
+        $this->region = trim($region);
+        $this->city = trim($city);
+        $this->postal = trim($postal);
+        $this->countryIso = trim($countryIso);
+        $this->regionIso = trim($regionIso);
         $this->coordinates = $coordinates;
     }
 
