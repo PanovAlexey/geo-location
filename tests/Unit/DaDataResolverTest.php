@@ -9,27 +9,27 @@ use PHPUnit\Framework\TestCase;
 
 class DaDataResolverTest extends TestCase
 {
-    function getIncorrectIp()
+    function getIncorrectIp(): string
     {
         return '123456';
     }
 
-    function getCorrectIp()
+    function getCorrectIp(): string
     {
         return '8.8.8.8';
     }
 
-    function getEnLanguageCode()
+    function getEnLanguageCode(): string
     {
         return 'en';
     }
 
-    function getDefaultLanguage()
+    function getDefaultLanguage(): string
     {
         return $this->getEnLanguageCode();
     }
 
-    function testGetLocation_incorrectIp_IncorrectIpException()
+    function testGetLocation_incorrectIp_IncorrectIpException(): void
     {
         $this->expectException(IncorrectIpException::class);
         $daDataResolver = new DaDataResolver($this->getDefaultLanguage(), $this->getIncorrectIp());
