@@ -14,5 +14,5 @@ interface LocationInterface
 
     public function getCity(): string;
 
-    public function getCoordinates(): CoordinatesInterface;
+    public function getCoordinates(): ?CoordinatesInterface;
 }

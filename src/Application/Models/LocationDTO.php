@@ -22,7 +22,7 @@ class LocationDTO implements LocationInterface
         string $postal,
         string $countryIso,
         string $regionIso,
-        CoordinatesInterface $coordinates
+        ?CoordinatesInterface $coordinates
     ) {
         $this->country = trim($country);
         $this->region = trim($region);
