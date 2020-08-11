@@ -2,6 +2,8 @@
 
 namespace CodeblogPro\GeoLocation\Application\GeoIpRemoteServices;
 
+use CodeblogPro\GeoLocation\Application\Interfaces\IpAddressInterface;
+use CodeblogPro\GeoLocation\Application\Interfaces\LanguageInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
 use CodeblogPro\GeoLocation\Application\Models\Coordinates;
 use CodeblogPro\GeoLocation\Application\Models\LocationDTO;
@@ -10,29 +12,21 @@ use Illuminate\Support\Facades\Config;
 
 class SypexGeo extends TemplateOfWorkingWithRemoteServiceApi
 {
-    public function isEnabled(): bool
-    {
-        return (bool)(Config('geolocation.sypex.enabled') ?? false);
-    }
-
-    public function getSort(): int
-    {
-        return (int)(Config('geolocation.sypex.sort') ?? 0);
-    }
-
-    protected function prepareRequest(): GuzzleHttp\Psr7\Request
+    protected function prepareRequest(IpAddressInterface $ipAddress): GuzzleHttp\Psr7\Request
     {
         return new GuzzleHttp\Psr7\Request(
             'GET',
-            $this->getUrl() . $this->getIpAddress()->getValue(),
+            $this->options->getUrl() . $ipAddress->getValue(),
             [
                 'Accept' => 'application/json'
             ]
         );
     }
 
-    protected function getLocationByResponse(GuzzleHttp\Psr7\Response $response): LocationInterface
-    {
+    protected function getLocationByResponse(
+        GuzzleHttp\Psr7\Response $response,
+        LanguageInterface $language
+    ): LocationInterface {
         $responseContentJson = $response->getBody()->getContents();
         $responseContent = $this->getContentFromJson($responseContentJson);
         $coordinates = null;
@@ -47,7 +41,7 @@ class SypexGeo extends TemplateOfWorkingWithRemoteServiceApi
             );
         }
 
-        $languagePostfix = 'name_' . $this->getLanguageCode();
+        $languagePostfix = 'name_' . $language->getCode();
 
         return new LocationDTO(
             $responseContent->country->$languagePostfix ?? '',
@@ -58,15 +52,5 @@ class SypexGeo extends TemplateOfWorkingWithRemoteServiceApi
             $responseContent->region->iso ?? '',
             $coordinates
         );
-    }
-
-    protected function getKey(): string
-    {
-        return 'Token ' . Config('geolocation.sypex.key');
-    }
-
-    protected function getUrl(): string
-    {
-        return Config('geolocation.sypex.url');
     }
 }

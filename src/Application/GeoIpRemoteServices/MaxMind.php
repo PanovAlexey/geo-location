@@ -2,39 +2,32 @@
 
 namespace CodeblogPro\GeoLocation\Application\GeoIpRemoteServices;
 
+use CodeblogPro\GeoLocation\Application\Interfaces\IpAddressInterface;
+use CodeblogPro\GeoLocation\Application\Interfaces\LanguageInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
 use CodeblogPro\GeoLocation\Application\Models\Coordinates;
 use CodeblogPro\GeoLocation\Application\Models\LocationDTO;
 use GuzzleHttp;
-use Illuminate\Support\Facades\Config;
 
 class MaxMind extends TemplateOfWorkingWithRemoteServiceApi
 {
-    public function isEnabled(): bool
-    {
-        return (bool)(Config('geolocation.maxmind.enabled') ?? false);
-    }
-
-    public function getSort(): int
-    {
-        return (int)(Config('geolocation.maxmind.sort') ?? 0);
-    }
-
-    protected function prepareRequest(): GuzzleHttp\Psr7\Request
+    protected function prepareRequest(IpAddressInterface $ipAddress): GuzzleHttp\Psr7\Request
     {
         return new GuzzleHttp\Psr7\Request(
             'GET',
-            $this->getUrl() . $this->getIpAddress()->getValue(),
+            $this->options->getUrl() . $ipAddress->getValue(),
             [
-                'Authorization' => $this->getKey(),
+                'Authorization' => $this->options->getKey(),
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ]
         );
     }
 
-    protected function getLocationByResponse(GuzzleHttp\Psr7\Response $response): LocationInterface
-    {
+    protected function getLocationByResponse(
+        GuzzleHttp\Psr7\Response $response,
+        LanguageInterface $language
+    ): LocationInterface {
         $responseContentJson = $response->getBody()->getContents();
         $responseContent = $this->getContentFromJson($responseContentJson);
         $coordinates = null;
@@ -46,7 +39,7 @@ class MaxMind extends TemplateOfWorkingWithRemoteServiceApi
             );
         }
 
-        $languagePostfix = $this->getLanguageCode();
+        $languagePostfix = $language->getCode();
         $firstSubdivision = (empty($responseContent->subdivisions)) ? [] : current($responseContent->subdivisions);
 
         return new LocationDTO(
@@ -61,16 +54,6 @@ class MaxMind extends TemplateOfWorkingWithRemoteServiceApi
             ),
             $coordinates
         );
-    }
-
-    protected function getKey(): string
-    {
-        return 'Basic ' . Config('geolocation.maxmind.key');
-    }
-
-    protected function getUrl(): string
-    {
-        return Config('geolocation.maxmind.url');
     }
 
     private function getRegionIsoCodeByCountryIsoCodeAndRegionCode(string $countryIsoCode = '', string $regionCode = ''): string

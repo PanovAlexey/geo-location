@@ -16,7 +16,7 @@ class IpAddress implements IpAddressInterface
 
     public function getValue(): string
     {
-        $this->value;
+        return $this->value;
     }
 
     private function validate(string $value): string

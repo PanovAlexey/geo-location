@@ -6,39 +6,29 @@ use CodeblogPro\GeoLocation\Application\Exceptions\ConnectException;
 use CodeblogPro\GeoLocation\Application\Interfaces\IpAddressInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LanguageInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
-use CodeblogPro\GeoLocation\Application\Models\IpAddress;
+use CodeblogPro\GeoLocation\Application\Interfaces\RemoteServicesOptions;
 use GuzzleHttp;
 
 abstract class TemplateOfWorkingWithRemoteServiceApi
 {
-    protected LanguageInterface $language;
-    protected IpAddressInterface $ipAddress;
+    protected RemoteServicesOptions $options;
 
-    abstract protected function getKey(): string;
+    abstract protected function getLocationByResponse(
+        GuzzleHttp\Psr7\Response $response,
+        LanguageInterface $language
+    ): LocationInterface;
 
-    abstract protected function getUrl(): string;
-
-    abstract public function isEnabled(): bool;
-
-    abstract public function getSort(): int;
-
-    public function __construct(IpAddressInterface $ipAddress, LanguageInterface $language)
+    public function __construct(RemoteServicesOptions $options)
     {
-        $this->ipAddress = $ipAddress;
-        $this->language = $language;
+        $this->options = $options;
     }
 
-    public function getLocation(): LocationInterface
+    public function getLocation(IpAddressInterface $ipAddress, LanguageInterface $language): LocationInterface
     {
-        $request = $this->prepareRequest();
+        $request = $this->prepareRequest($ipAddress);
         $response = $this->request($request);
 
-        return $this->getLocationByResponse($response);
-    }
-
-    public function getLanguageCode(): string
-    {
-        return $this->language->getCode();
+        return $this->getLocationByResponse($response, $language);
     }
 
     protected function tryToRequest(GuzzleHttp\Psr7\Request $request): GuzzleHttp\Psr7\Response
@@ -72,10 +62,5 @@ abstract class TemplateOfWorkingWithRemoteServiceApi
         }
 
         return $content;
-    }
-
-    protected function getIpAddress(): IpAddressInterface
-    {
-        return $this->ipAddress;
     }
 }
