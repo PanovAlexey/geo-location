@@ -67,4 +67,20 @@ class LocationDTO implements LocationInterface
     {
         return $this->coordinates;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'city' => $this->getCity(),
+            'region' => $this->getRegion(),
+            'country' => $this->getCountry(),
+            'country_iso' => $this->getCountryIso(),
+            'region_iso' => $this->getRegionIso(),
+            'postal' => $this->getPostal(),
+            'coordinates' => [
+                'lat' => $this->getCoordinates()->getLat(),
+                'long' => $this->getCoordinates()->getLong(),
+            ]
+        ];
+    }
 }
