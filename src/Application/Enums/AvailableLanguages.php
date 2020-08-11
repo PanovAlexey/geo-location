@@ -4,6 +4,6 @@ namespace CodeblogPro\GeoLocation\Application\Enums;
 
 class AvailableLanguages
 {
-    const RU = 'ru';
-    const EN = 'en';
+    public const RU = 'ru';
+    public const EN = 'en';
 }
