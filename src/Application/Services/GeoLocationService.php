@@ -10,20 +10,15 @@ use CodeblogPro\GeoLocation\Application\Exceptions\GeoLocationAppException;
 
 class GeoLocationService
 {
-    public function getLocationByIp(string $ip, string $resultLanguageCode = ''): LocationInterface
+    public function getLocationArrayByIp(string $ip, string $resultLanguageCode = ''): array
     {
-        try {
-            return $this->tryToGetLocationByIp($ip, $resultLanguageCode);
-        } catch (\Throwable $throwable) {
-            throw new GeoLocationAppException('An error occurred while executing the program.', 0, $throwable);
-        }
+        return $this->getLocationByIp($ip, $resultLanguageCode)->toArray();
     }
 
-    private function tryToGetLocationByIp(string $ip, string $resultLanguageCode = ''): LocationInterface
+    public function getLocationByIp(string $ip, string $resultLanguageCode = ''): LocationInterface
     {
         $ipAddress = new IpAddress($ip);
         $language = new Language($resultLanguageCode);
-
         $sortedServices = (GeoIpRemoteServices::getInstance())->getSortedServices();
         $location = $exception = null;
 
@@ -40,7 +35,7 @@ class GeoLocationService
         }
 
         if (!isset($location)) {
-            throw new GeoLocationAppException('An error occurred while executing the program.', 0, $exception);
+            throw new GeoLocationAppException('An error occurred while executing the program. ' . $exception->getMessage());
         }
 
         return $location;
