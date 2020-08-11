@@ -10,14 +10,14 @@ class Language implements LanguageInterface
 {
     private string $code;
 
-    public function __constructor(string $code)
+    public function __construct(string $code)
     {
         $this->code = $this->validate($code);
     }
 
     public function getCode(): string
     {
-        return 'ru';
+        return $this->code;
     }
 
     private function validate(string $code): string
