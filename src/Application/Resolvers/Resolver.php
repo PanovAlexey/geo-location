@@ -3,23 +3,24 @@
 namespace CodeblogPro\GeoLocation\Application\Resolvers;
 
 use CodeblogPro\GeoLocation\Application\Exceptions\ConnectException;
-use CodeblogPro\GeoLocation\Application\Exceptions\IncorrectIpException;
+use CodeblogPro\GeoLocation\Application\Interfaces\IpAddressInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LanguageInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
+use CodeblogPro\GeoLocation\Application\Models\IpAddress;
 use GuzzleHttp;
 
 abstract class Resolver
 {
     protected LanguageInterface $language;
-    protected string $ip;
+    protected IpAddressInterface $ipAddress;
 
     abstract protected function getKey(): string;
 
     abstract protected function getUrl(): string;
 
-    public function __construct(string $ip, LanguageInterface $language)
+    public function __construct(IpAddressInterface $ipAddress, LanguageInterface $language)
     {
-        $this->setIp($ip);
+        $this->ipAddress = $ipAddress;
         $this->language = $language;
     }
 
@@ -69,26 +70,8 @@ abstract class Resolver
         return $content;
     }
 
-    protected function isIpValid(string $ip): bool
+    protected function getIpAddress(): IpAddressInterface
     {
-        if (!filter_var($ip, FILTER_VALIDATE_IP)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    protected function getIp(): string
-    {
-        return $this->ip;
-    }
-
-    private function setIp(string $ip): void
-    {
-        if (!$this->isIpValid($ip)) {
-            throw new IncorrectIpException();
-        }
-
-        $this->ip = $ip;
+        return $this->ipAddress;
     }
 }

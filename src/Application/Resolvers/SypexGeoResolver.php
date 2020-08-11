@@ -14,7 +14,7 @@ class SypexGeoResolver extends Resolver
     {
         return new GuzzleHttp\Psr7\Request(
             'GET',
-            $this->getUrl() . $this->getIp(),
+            $this->getUrl() . $this->getIpAddress()->getValue(),
             [
                 'Accept' => 'application/json'
             ]
