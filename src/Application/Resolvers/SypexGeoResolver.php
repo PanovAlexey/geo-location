@@ -37,7 +37,7 @@ class SypexGeoResolver extends Resolver
             );
         }
 
-        $languagePostfix = 'name_' . $this->getResultLanguage();
+        $languagePostfix = 'name_' . $this->getLanguageCode();
 
         return new LocationDTO(
             $responseContent->country->$languagePostfix ?? '',

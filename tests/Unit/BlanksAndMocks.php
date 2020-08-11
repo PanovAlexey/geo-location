@@ -2,6 +2,9 @@
 
 namespace CodeblogPro\GeoLocation\Tests\Unit;
 
+use CodeblogPro\GeoLocation\Application\Enums\AvailableLanguages;
+use CodeblogPro\GeoLocation\Application\Models\Language;
+
 class BlanksAndMocks
 {
     public static function getIncorrectIp(): string
@@ -14,18 +17,18 @@ class BlanksAndMocks
         return '8.8.8.8';
     }
 
-    public static function getEnLanguageCode(): string
+    public static function getEnLanguage(): LanguageInterface
     {
-        return 'en';
+        return new Language(AvailableLanguages::EN);
     }
 
-    public static function getRuLanguageCode(): string
+    public static function getRuLanguage(): LanguageInterface
     {
-        return 'ru';
+        return new Language(AvailableLanguages::RU);
     }
 
-    public static function getDefaultLanguage(): string
+    public static function getDefaultLanguage(): LanguageInterface
     {
-        return self::getEnLanguageCode();
+        return self::getEnLanguage();
     }
 }

@@ -17,13 +17,15 @@ class MaxMindResolverTest extends TestCase
 
     public function testGetResultLanguage_defaultLanguage_ShouldReturnDefaultLanguage(): void
     {
-        $maxMindResolver = new MaxMindResolver(BlanksAndMocks::getCorrectIp(), BlanksAndMocks::getDefaultLanguage());
-        $this->assertSame($maxMindResolver->getResultLanguage(), BlanksAndMocks::getDefaultLanguage());
+        $defaultLanguage = BlanksAndMocks::getDefaultLanguage();
+        $maxMindResolver = new MaxMindResolver(BlanksAndMocks::getCorrectIp(), $defaultLanguage);
+        $this->assertSame($maxMindResolver->getLanguageCode(), $defaultLanguage->getCode());
     }
 
     public function testGetResultLanguage_ruLanguage_ShouldReturnRuLanguage(): void
     {
-        $maxMindResolver = new MaxMindResolver(BlanksAndMocks::getCorrectIp(), BlanksAndMocks::getRuLanguageCode());
-        $this->assertSame($maxMindResolver->getResultLanguage(), BlanksAndMocks::getRuLanguageCode());
+        $ruLanguage = BlanksAndMocks::getRuLanguage();
+        $maxMindResolver = new MaxMindResolver(BlanksAndMocks::getCorrectIp(), $ruLanguage);
+        $this->assertSame($maxMindResolver->getLanguageCode(), $ruLanguage->getCode());
     }
 }

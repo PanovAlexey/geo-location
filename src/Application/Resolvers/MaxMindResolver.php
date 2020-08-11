@@ -36,7 +36,7 @@ class MaxMindResolver extends Resolver
             );
         }
 
-        $languagePostfix = $this->getResultLanguage();
+        $languagePostfix = $this->getLanguageCode();
         $firstSubdivision = (empty($responseContent->subdivisions)) ? [] : current($responseContent->subdivisions);
 
         return new LocationDTO(

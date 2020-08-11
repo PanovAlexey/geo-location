@@ -17,13 +17,15 @@ class SypexResolverTest extends TestCase
 
     public function testGetResultLanguage_defaultLanguage_ShouldReturnDefaultLanguage(): void
     {
-        $sypexResolver = new SypexGeoResolver(BlanksAndMocks::getCorrectIp(), BlanksAndMocks::getDefaultLanguage());
-        $this->assertSame($sypexResolver->getResultLanguage(), BlanksAndMocks::getDefaultLanguage());
+        $defaultLanguage = BlanksAndMocks::getDefaultLanguage();
+        $sypexResolver = new SypexGeoResolver(BlanksAndMocks::getCorrectIp(), $defaultLanguage);
+        $this->assertSame($sypexResolver->getLanguageCode(), $defaultLanguage->getCode());
     }
 
     public function testGetResultLanguage_ruLanguage_ShouldReturnRuLanguage(): void
     {
-        $sypexResolver = new SypexGeoResolver(BlanksAndMocks::getCorrectIp(), BlanksAndMocks::getRuLanguageCode());
-        $this->assertSame($sypexResolver->getResultLanguage(), BlanksAndMocks::getRuLanguageCode());
+        $ruLanguage = BlanksAndMocks::getRuLanguage();
+        $sypexResolver = new SypexGeoResolver(BlanksAndMocks::getCorrectIp(), $ruLanguage);
+        $this->assertSame($sypexResolver->getLanguageCode(), $ruLanguage->getCode());
     }
 }

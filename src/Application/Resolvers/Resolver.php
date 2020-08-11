@@ -4,22 +4,23 @@ namespace CodeblogPro\GeoLocation\Application\Resolvers;
 
 use CodeblogPro\GeoLocation\Application\Exceptions\ConnectException;
 use CodeblogPro\GeoLocation\Application\Exceptions\IncorrectIpException;
+use CodeblogPro\GeoLocation\Application\Interfaces\LanguageInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
 use GuzzleHttp;
 
 abstract class Resolver
 {
-    protected string $resultLanguage;
+    protected LanguageInterface $language;
     protected string $ip;
 
     abstract protected function getKey(): string;
 
     abstract protected function getUrl(): string;
 
-    public function __construct(string $ip, string $resultLanguage)
+    public function __construct(string $ip, LanguageInterface $language)
     {
         $this->setIp($ip);
-        $this->setResultLanguage($resultLanguage);
+        $this->language = $language;
     }
 
     public function getLocation(): LocationInterface
@@ -30,9 +31,9 @@ abstract class Resolver
         return $this->getLocationByResponse($response);
     }
 
-    public function getResultLanguage(): string
+    public function getLanguageCode(): string
     {
-        return $this->resultLanguage;
+        return $this->language->getCode();
     }
 
     protected function tryToRequest(GuzzleHttp\Psr7\Request $request): GuzzleHttp\Psr7\Response
@@ -89,10 +90,5 @@ abstract class Resolver
         }
 
         $this->ip = $ip;
-    }
-
-    private function setResultLanguage(string $resultLanguage): void
-    {
-        $this->resultLanguage = $resultLanguage;
     }
 }
