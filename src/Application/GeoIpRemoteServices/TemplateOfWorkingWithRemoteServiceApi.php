@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeblogPro\GeoLocation\Application\Resolvers;
+namespace CodeblogPro\GeoLocation\Application\GeoIpRemoteServices;
 
 use CodeblogPro\GeoLocation\Application\Exceptions\ConnectException;
 use CodeblogPro\GeoLocation\Application\Interfaces\IpAddressInterface;
@@ -9,7 +9,7 @@ use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
 use CodeblogPro\GeoLocation\Application\Models\IpAddress;
 use GuzzleHttp;
 
-abstract class Resolver
+abstract class TemplateOfWorkingWithRemoteServiceApi
 {
     protected LanguageInterface $language;
     protected IpAddressInterface $ipAddress;

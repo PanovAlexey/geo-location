@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeblogPro\GeoLocation\Application\Resolvers;
+namespace CodeblogPro\GeoLocation\Application\GeoIpRemoteServices;
 
 use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
 use CodeblogPro\GeoLocation\Application\Models\Coordinates;
@@ -8,7 +8,7 @@ use CodeblogPro\GeoLocation\Application\Models\LocationDTO;
 use GuzzleHttp;
 use Illuminate\Support\Facades\Config;
 
-class SypexGeoResolver extends Resolver
+class SypexGeo extends TemplateOfWorkingWithRemoteServiceApi
 {
     protected function prepareRequest(): GuzzleHttp\Psr7\Request
     {
