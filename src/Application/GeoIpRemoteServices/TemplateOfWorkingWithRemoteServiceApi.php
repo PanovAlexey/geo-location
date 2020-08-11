@@ -18,6 +18,10 @@ abstract class TemplateOfWorkingWithRemoteServiceApi
 
     abstract protected function getUrl(): string;
 
+    abstract public function isEnabled(): bool;
+
+    abstract public function getSort(): int;
+
     public function __construct(IpAddressInterface $ipAddress, LanguageInterface $language)
     {
         $this->ipAddress = $ipAddress;

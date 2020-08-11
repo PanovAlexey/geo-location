@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Config;
 
 class DaData extends TemplateOfWorkingWithRemoteServiceApi
 {
+    public function isEnabled(): bool
+    {
+        return (bool)(Config('geolocation.dadata.enabled') ?? false);
+    }
+
+    public function getSort(): int
+    {
+        return (int)(Config('geolocation.dadata.sort') ?? 0);
+    }
+
     protected function prepareRequest(): GuzzleHttp\Psr7\Request
     {
         return new GuzzleHttp\Psr7\Request(

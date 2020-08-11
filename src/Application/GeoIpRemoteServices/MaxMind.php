@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Config;
 
 class MaxMind extends TemplateOfWorkingWithRemoteServiceApi
 {
+    public function isEnabled(): bool
+    {
+        return (bool)(Config('geolocation.maxmind.enabled') ?? false);
+    }
+
+    public function getSort(): int
+    {
+        return (int)(Config('geolocation.maxmind.sort') ?? 0);
+    }
+
     protected function prepareRequest(): GuzzleHttp\Psr7\Request
     {
         return new GuzzleHttp\Psr7\Request(

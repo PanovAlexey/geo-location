@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Config;
 
 class SypexGeo extends TemplateOfWorkingWithRemoteServiceApi
 {
+    public function isEnabled(): bool
+    {
+        return (bool)(Config('geolocation.sypex.enabled') ?? false);
+    }
+
+    public function getSort(): int
+    {
+        return (int)(Config('geolocation.sypex.sort') ?? 0);
+    }
+
     protected function prepareRequest(): GuzzleHttp\Psr7\Request
     {
         return new GuzzleHttp\Psr7\Request(
