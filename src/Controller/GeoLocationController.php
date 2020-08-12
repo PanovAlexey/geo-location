@@ -19,28 +19,26 @@ class GeoLocationController extends Controller
         $geoLocationService = new GeoLocationService();
 
         try {
-            $result = json_encode(
-                ['data' => $geoLocationService->getLocationArrayByIp($ip, $language)]
-            );
+            $result = ['data' => $geoLocationService->getLocationArrayByIp($ip, $language)];
         } catch (IncorrectIpException $exception) {
-            http_response_code(400);
+            $result = ['error' => 'Incorect ip.' . $exception->getMessage()];
 
-            $result = json_encode(['error' => 'Incorect ip.' . $exception->getMessage()]);
+            return response()->json($result, 400);
         } catch (IncorrectLanguageCodeException $exception) {
-            http_response_code(400);
+            $result = ['error' => 'Incorect language code.' . $exception->getMessage()];
 
-            $result = json_encode(['error' => 'Incorect language code. ' . $exception->getMessage()]);
+            return response()->json($result, 400);
         } catch (ConnectException | GeoLocationAppException | IncorrectResponseContent $exception) {
-            http_response_code(500);
+            $result = ['error' => 'Server error. ' . $exception->getMessage()];
 
-            $result = json_encode(['error' => 'Server error. ' . $exception->getMessage()]);
+            return response()->json($result, 500);
         } catch (\Exceiption $exception) {
-            http_response_code(500);
+            $result = ['error' => 'Unexpected error. ' . $exception->getMessage()];
 
-            $result = json_encode(['error' => 'Unexpected error. ' . $exception->getMessage()]);
+            return response()->json($result, 500);
         }
 
-        return $result;
+        return response()->json($result);
     }
 
     public function incorrectMethod()
