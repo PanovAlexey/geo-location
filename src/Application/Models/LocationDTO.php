@@ -13,7 +13,7 @@ class LocationDTO implements LocationInterface
     private string $postal;
     private string $countryIso;
     private string $regionIso;
-    private CoordinatesInterface $coordinates;
+    private ?CoordinatesInterface $coordinates;
 
     public function __construct(
         string $country,
@@ -63,9 +63,9 @@ class LocationDTO implements LocationInterface
         return $this->regionIso;
     }
 
-    public function getCoordinates(): CoordinatesInterface
+    public function getCoordinates(): ?CoordinatesInterface
     {
-        return $this->coordinates;
+        return $this->coordinates ?? null;
     }
 
     public function toArray(): array
@@ -78,8 +78,8 @@ class LocationDTO implements LocationInterface
             'region_iso' => $this->getRegionIso(),
             'postal' => $this->getPostal(),
             'coordinates' => [
-                'lat' => $this->getCoordinates()->getLat(),
-                'long' => $this->getCoordinates()->getLong(),
+                'lat' => (empty($this->getCoordinates())) ? null : $this->getCoordinates()->getLat(),
+                'long' => (empty($this->getCoordinates())) ? null : $this->getCoordinates()->getLong(),
             ]
         ];
     }
