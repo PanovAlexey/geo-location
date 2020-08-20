@@ -16,7 +16,7 @@ class GeoLocationController extends Controller
 {
     public function show(string $ip = '', string $language = '')
     {
-        $geoLocationService = new GeoLocationService();
+        $geoLocationService = resolve(GeoLocationService::class);
 
         try {
             $result = ['data' => $geoLocationService->getLocationArrayByIp($ip, $language)];
