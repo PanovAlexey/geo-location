@@ -2,7 +2,7 @@
 
 namespace CodeblogPro\GeoLocation\Application\Models;
 
-use CodeblogPro\GeoLocation\Application\Interfaces\CoordinatesInterface;
+use CodeblogPro\GeoCoordinates\CoordinatesInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
 
 class LocationDTO implements LocationInterface
@@ -78,8 +78,8 @@ class LocationDTO implements LocationInterface
             'region_iso' => $this->getRegionIso(),
             'postal' => $this->getPostal(),
             'coordinates' => [
-                'lat' => (empty($this->getCoordinates())) ? null : $this->getCoordinates()->getLat(),
-                'long' => (empty($this->getCoordinates())) ? null : $this->getCoordinates()->getLong(),
+                'lat' => (empty($this->getCoordinates())) ? null : $this->getCoordinates()->getLatitude(),
+                'long' => (empty($this->getCoordinates())) ? null : $this->getCoordinates()->getLongitude(),
             ]
         ];
     }

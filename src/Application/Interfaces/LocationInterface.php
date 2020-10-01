@@ -2,6 +2,8 @@
 
 namespace CodeblogPro\GeoLocation\Application\Interfaces;
 
+use CodeblogPro\GeoCoordinates\CoordinatesInterface;
+
 interface LocationInterface
 {
     public function getCountry(): string;

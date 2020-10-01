@@ -5,7 +5,7 @@ namespace CodeblogPro\GeoLocation\Application\GeoIpRemoteServices;
 use CodeblogPro\GeoLocation\Application\Interfaces\IpAddressInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LanguageInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
-use CodeblogPro\GeoLocation\Application\Models\Coordinates;
+use CodeblogPro\GeoCoordinates\Coordinates;
 use CodeblogPro\GeoLocation\Application\Models\LocationDTO;
 use GuzzleHttp;
 
