@@ -20,7 +20,7 @@ class CurrentIpResolver implements CurrentIpResolverInterface
             $ipAddressString = $remoteAddrIpAddressString;
         } elseif (!empty($_SERVER['HTTP_CLIENT_IP']) && $this->isIpValid($httpClientIpAddressString = trim($_SERVER['HTTP_CLIENT_IP']))) {
             $ipAddressString = $httpClientIpAddressString;
-        } else (
+        } elseif (
             !empty($_SERVER['HTTP_X_FORWARDED_FOR'])
             && $this->isIpValid($httpForwardedIpAddressString = trim($_SERVER['HTTP_X_FORWARDED_FOR']))
         ) {
