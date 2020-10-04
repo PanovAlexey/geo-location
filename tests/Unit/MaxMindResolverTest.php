@@ -16,17 +16,5 @@ class MaxMindTest extends TestCase
         $maxMind->getLocation();
     }
 
-    public function testGetResultLanguage_defaultLanguage_ShouldReturnDefaultLanguage(): void
-    {
-        $defaultLanguage = BlanksAndMocks::getDefaultLanguage();
-        $maxMind = new MaxMind(BlanksAndMocks::getCorrectIp(), $defaultLanguage);
-        $this->assertSame($maxMind->getLanguageCode(), $defaultLanguage->getCode());
-    }
 
-    public function testGetResultLanguage_ruLanguage_ShouldReturnRuLanguage(): void
-    {
-        $ruLanguage = BlanksAndMocks::getRuLanguage();
-        $maxMind = new MaxMind(BlanksAndMocks::getCorrectIp(), $ruLanguage);
-        $this->assertSame($maxMind->getLanguageCode(), $ruLanguage->getCode());
-    }
 }

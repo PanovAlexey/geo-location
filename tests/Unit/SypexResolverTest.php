@@ -15,18 +15,4 @@ class SypexTest extends TestCase
         $sypex = new SypexGeo(new IpAddress(BlanksAndMocks::getIncorrectIpValue()), BlanksAndMocks::getDefaultLanguage());
         $sypex->getLocation();
     }
-
-    public function testGetResultLanguage_defaultLanguage_ShouldReturnDefaultLanguage(): void
-    {
-        $defaultLanguage = BlanksAndMocks::getDefaultLanguage();
-        $sypex = new SypexGeo(BlanksAndMocks::getCorrectIp(), $defaultLanguage);
-        $this->assertSame($sypex->getLanguageCode(), $defaultLanguage->getCode());
-    }
-
-    public function testGetResultLanguage_ruLanguage_ShouldReturnRuLanguage(): void
-    {
-        $ruLanguage = BlanksAndMocks::getRuLanguage();
-        $sypex = new SypexGeo(BlanksAndMocks::getCorrectIp(), $ruLanguage);
-        $this->assertSame($sypex->getLanguageCode(), $ruLanguage->getCode());
-    }
 }
