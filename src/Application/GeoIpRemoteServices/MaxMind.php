@@ -4,9 +4,11 @@ namespace CodeblogPro\GeoLocation\Application\GeoIpRemoteServices;
 
 use CodeblogPro\GeoLocation\Application\Interfaces\IpAddressInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LanguageInterface;
-use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
 use CodeblogPro\GeoCoordinates\Coordinates;
-use CodeblogPro\GeoLocation\Application\Models\LocationDTO;
+use CodeblogPro\GeoLocationAddress\Country;
+use CodeblogPro\GeoLocationAddress\LocationInterface;
+use CodeblogPro\GeoLocationAddress\Location;
+use CodeblogPro\GeoLocationAddress\Region;
 use GuzzleHttp;
 
 class MaxMind extends TemplateOfWorkingWithRemoteServiceApi
@@ -42,17 +44,22 @@ class MaxMind extends TemplateOfWorkingWithRemoteServiceApi
         $languagePostfix = $language->getCode();
         $firstSubdivision = (empty($responseContent->subdivisions)) ? [] : current($responseContent->subdivisions);
 
-        return new LocationDTO(
-            $responseContent->country->names->$languagePostfix ?? '',
-            $firstSubdivision->names->$languagePostfix ?? '',
-            $responseContent->city->names->$languagePostfix ?? '',
-            $responseContent->postal->code ?? '',
-            $responseContent->country->iso_code ?? '',
-            $this->getRegionIsoCodeByCountryIsoCodeAndRegionCode(
-                $responseContent->country->iso_code ?? '',
-                $firstSubdivision->iso_code ?? ''
+        return new Location(
+            $coordinates,
+            new Country(
+                $responseContent->country->names->$languagePostfix ?? '',
+                $responseContent->country->iso_code ?? ''
             ),
-            $coordinates
+            new Region(
+                $firstSubdivision->names->$languagePostfix ?? '',
+                $this->getRegionIsoCodeByCountryIsoCodeAndRegionCode(
+                    $responseContent->country->iso_code ?? '',
+                    $firstSubdivision->iso_code ?? ''
+                )
+            ),
+            $responseContent->city->names->$languagePostfix ?? '',
+            '',
+            $responseContent->postal->code ?? ''
         );
     }
 

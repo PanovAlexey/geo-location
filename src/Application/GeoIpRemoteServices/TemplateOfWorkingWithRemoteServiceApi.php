@@ -5,8 +5,8 @@ namespace CodeblogPro\GeoLocation\Application\GeoIpRemoteServices;
 use CodeblogPro\GeoLocation\Application\Exceptions\ConnectException;
 use CodeblogPro\GeoLocation\Application\Interfaces\IpAddressInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LanguageInterface;
-use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\RemoteServicesOptions;
+use CodeblogPro\GeoLocationAddress\LocationInterface;
 use GuzzleHttp;
 
 abstract class TemplateOfWorkingWithRemoteServiceApi

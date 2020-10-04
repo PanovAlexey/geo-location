@@ -4,9 +4,11 @@ namespace CodeblogPro\GeoLocation\Application\GeoIpRemoteServices;
 
 use CodeblogPro\GeoLocation\Application\Interfaces\IpAddressInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LanguageInterface;
-use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
 use CodeblogPro\GeoCoordinates\Coordinates;
-use CodeblogPro\GeoLocation\Application\Models\LocationDTO;
+use CodeblogPro\GeoLocationAddress\LocationInterface;
+use CodeblogPro\GeoLocationAddress\Country;
+use CodeblogPro\GeoLocationAddress\Location;
+use CodeblogPro\GeoLocationAddress\Region;
 use GuzzleHttp;
 
 class DaData extends TemplateOfWorkingWithRemoteServiceApi
@@ -37,15 +39,20 @@ class DaData extends TemplateOfWorkingWithRemoteServiceApi
                 (float)$responseContent->location->data->geo_lon
             );
         }
-
-        return new LocationDTO(
-            $responseContent->location->data->country ?? '',
-            $responseContent->location->data->region_with_type ?? '',
+        
+        return new Location(
+            $coordinates,
+            new Country(
+                $responseContent->location->data->country ?? '', 
+                $responseContent->location->data->country_iso_code ?? ''
+            ),
+            new Region(
+                $responseContent->location->data->region_with_type ?? '',
+                $responseContent->location->data->region_iso_code ?? ''
+            ),
             $responseContent->location->data->city ?? '',
+            '',
             $responseContent->location->data->postal_code ?? '',
-            $responseContent->location->data->country_iso_code ?? '',
-            $responseContent->location->data->region_iso_code ?? '',
-            $coordinates
         );
     }
 }

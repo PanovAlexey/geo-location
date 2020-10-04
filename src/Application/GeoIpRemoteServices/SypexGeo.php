@@ -4,9 +4,11 @@ namespace CodeblogPro\GeoLocation\Application\GeoIpRemoteServices;
 
 use CodeblogPro\GeoLocation\Application\Interfaces\IpAddressInterface;
 use CodeblogPro\GeoLocation\Application\Interfaces\LanguageInterface;
-use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
 use CodeblogPro\GeoCoordinates\Coordinates;
-use CodeblogPro\GeoLocation\Application\Models\LocationDTO;
+use CodeblogPro\GeoLocationAddress\Country;
+use CodeblogPro\GeoLocationAddress\Location;
+use CodeblogPro\GeoLocationAddress\LocationInterface;
+use CodeblogPro\GeoLocationAddress\Region;
 use GuzzleHttp;
 use Illuminate\Support\Facades\Config;
 
@@ -43,14 +45,13 @@ class SypexGeo extends TemplateOfWorkingWithRemoteServiceApi
 
         $languagePostfix = 'name_' . $language->getCode();
 
-        return new LocationDTO(
-            $responseContent->country->$languagePostfix ?? '',
-            $responseContent->region->$languagePostfix ?? '',
+        return new Location(
+            $coordinates,
+            new Country($responseContent->country->$languagePostfix ?? '', $responseContent->country->iso ?? ''),
+            new Region($responseContent->region->$languagePostfix ?? '', $responseContent->region->iso ?? ''),
             $responseContent->city->$languagePostfix ?? '',
+            '',
             $responseContent->city->post ?? '',
-            $responseContent->country->iso ?? '',
-            $responseContent->region->iso ?? '',
-            $coordinates
         );
     }
 }

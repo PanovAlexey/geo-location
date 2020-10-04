@@ -2,6 +2,8 @@
 
 namespace CodeblogPro\GeoLocation\Application\Interfaces;
 
+use CodeblogPro\GeoLocationAddress\LocationInterface;
+
 /**
  * Interface GeoLocationServiceInterface
  * @package CodeblogPro\GeoLocation\Application\Interfaces

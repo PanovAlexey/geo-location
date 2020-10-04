@@ -4,10 +4,10 @@ namespace CodeblogPro\GeoLocation\Application\Services;
 
 use CodeblogPro\GeoLocation\Application\Services\CurrentIpResolver;
 use CodeblogPro\GeoLocation\Application\GeoIpRemoteServices\GeoIpRemoteServices;
-use CodeblogPro\GeoLocation\Application\Interfaces\LocationInterface;
 use CodeblogPro\GeoLocation\Application\Models\IpAddress;
 use CodeblogPro\GeoLocation\Application\Models\Language;
 use CodeblogPro\GeoLocation\Application\Exceptions\GeoLocationAppException;
+use CodeblogPro\GeoLocationAddress\LocationInterface;
 
 class GeoLocationService
 {
