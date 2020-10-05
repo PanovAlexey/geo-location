@@ -9,11 +9,13 @@ use CodeblogPro\GeoLocationAddress\Country;
 use CodeblogPro\GeoLocationAddress\Location;
 use CodeblogPro\GeoLocationAddress\LocationInterface;
 use CodeblogPro\GeoLocationAddress\Region;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp;
 
 class SypexGeo extends TemplateOfWorkingWithRemoteServiceApi
 {
-    protected function prepareRequest(IpAddressInterface $ipAddress): GuzzleHttp\Psr7\Request
+    protected function prepareRequest(IpAddressInterface $ipAddress): RequestInterface
     {
         return new GuzzleHttp\Psr7\Request(
             'GET',
@@ -25,7 +27,7 @@ class SypexGeo extends TemplateOfWorkingWithRemoteServiceApi
     }
 
     protected function getLocationByResponse(
-        GuzzleHttp\Psr7\Response $response,
+        ResponseInterface $response,
         LanguageInterface $language
     ): LocationInterface {
         $responseContentJson = $response->getBody()->getContents();
