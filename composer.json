@@ -51,5 +51,8 @@
                 "\\CodeblogPro\\GeoLocation\\ServiceProvider"
             ]
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
