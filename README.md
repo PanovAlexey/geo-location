@@ -7,7 +7,11 @@
 [![Total Downloads](https://poser.pugx.org/codeblog.pro/geo-location/downloads)](https://packagist.org/packages/codeblog.pro/geo-location)
 [![Version](https://poser.pugx.org/codeblog.pro/geo-location/version)](https://packagist.org/packages/codeblog.pro/geo-location)
 
-The service allows you to get information about the current location by the IP address.
+The package is a wrapper for several geolocation services at once. 
+The main task of the package is to determine the user's location by IP. 
+Due to the possibility of using several providers at once,
+ the free limit of each provider is summed up.
+
 
 ## Install
 
