@@ -2,7 +2,7 @@
 
 namespace CodeblogPro\GeoLocation\Tests\Unit;
 
-use CodeblogPro\GeoLocation\Application\Exceptions\IncorrectIPException;
+use CodeblogPro\GeoLocation\Application\Exceptions\IncorrectIpException;
 use CodeblogPro\GeoLocation\Application\GeoIpRemoteServices\MaxMindOptions;
 use CodeblogPro\GeoLocation\Application\GeoIpRemoteServices\MaxMind;
 use PHPUnit\Framework\TestCase;

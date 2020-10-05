@@ -5,7 +5,6 @@ namespace CodeblogPro\GeoLocation\Tests\Unit;
 use CodeblogPro\GeoLocation\Application\Exceptions\IncorrectIpException;
 use CodeblogPro\GeoLocation\Application\GeoIpRemoteServices\DaDataOptions;
 use CodeblogPro\GeoLocation\Application\GeoIpRemoteServices\DaData;
-use CodeblogPro\GeoLocation\Application\GeoIpRemoteServices\SypexGeoOptions;
 use PHPUnit\Framework\TestCase;
 
 class DaDataTest extends TestCase

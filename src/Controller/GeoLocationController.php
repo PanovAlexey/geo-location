@@ -32,7 +32,7 @@ class GeoLocationController extends Controller
             $result = ['error' => 'Server error. ' . $exception->getMessage()];
 
             return response()->json($result, 500);
-        } catch (\Exceiption $exception) {
+        } catch (\Exception $exception) {
             $result = ['error' => 'Unexpected error. ' . $exception->getMessage()];
 
             return response()->json($result, 500);
