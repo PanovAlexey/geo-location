@@ -20,11 +20,22 @@ $ composer require codeblog.pro/geo-location
 ## Usage
 
 ``` php
-$currentIpResolver = new \CodeblogPro\GeoLocation\Application\Services\CurrentIpResolver;();
-$geoLocationService = new \CodeblogPro\GeoLocation\Application\Services\GeoLocationService($currentIpResolver);
-$geoLocationService->getCurrentIp();
-$geoLocationService->getLocationByIp('8.8.8.8', 'RU');
-$geoLocationService->getLocationArrayByIp('8.8.8.8', 'RU');
+$geoLocationService = new \CodeblogPro\GeoLocation\Application\Services\GeoLocationService();
+$location = $geoLocationService->getLocationByIpAndLanguageResultCode('8.8.8.8', 'EN');
+var_dump($location);
+
+$locationArray = $geoLocationService->getLocationArrayByIpAndLanguageResultCode('8.8.8.8', 'RU');
+var_dump($locationArray);
+
+$currentIpResolver = new \CodeblogPro\GeoLocation\Application\Services\CurrentIpResolver();
+$currentIp = $geoLocationService->getCurrentIpByIpResolver($currentIpResolver)->getValue();
+var_dump($currentIp);
+
+$locationByIpResolverAndLanguageResultCode = $geoLocationService->getLocationByIpResolverAndLanguageResultCode(
+    $currentIpResolver,
+    'RU'
+);
+var_dump($locationByIpResolverAndLanguageResultCode);
 ```
 
 ## Testing
