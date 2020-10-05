@@ -10,9 +10,9 @@ use CodeblogPro\GeoLocation\Application\Models\Language;
 
 class BlanksAndMocks
 {
-    public static function getIncorrectIpValue(): string
+    public static function getIncorrectIp(): IpAddressInterface
     {
-        return '123456';
+        return new IpAddress('123');
     }
 
     public static function getCorrectIp(): IpAddressInterface
@@ -28,6 +28,11 @@ class BlanksAndMocks
     public static function getRuLanguage(): LanguageInterface
     {
         return new Language(AvailableLanguages::RU);
+    }
+
+    public static function getEmptyLanguage(): LanguageInterface
+    {
+        return new Language('');
     }
 
     public static function getDefaultLanguage(): LanguageInterface
