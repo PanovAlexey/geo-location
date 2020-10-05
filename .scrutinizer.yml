@@ -5,6 +5,8 @@ build:
                 override: true
             tests:
                 override: [php-scrutinizer-run]
+    environment:
+        php: 7.4.11
 
 filter:
     excluded_paths: [tests/*]
