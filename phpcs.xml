@@ -11,4 +11,6 @@
 
     <!-- Use the PSR2 Standard-->
     <rule ref="PSR2" />
+
+    <exclude-pattern>*/tests/*</exclude-pattern>
 </ruleset>

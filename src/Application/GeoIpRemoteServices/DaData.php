@@ -39,11 +39,11 @@ class DaData extends TemplateOfWorkingWithRemoteServiceApi
                 (float)$responseContent->location->data->geo_lon
             );
         }
-        
+
         return new Location(
             $coordinates,
             new Country(
-                $responseContent->location->data->country ?? '', 
+                $responseContent->location->data->country ?? '',
                 $responseContent->location->data->country_iso_code ?? ''
             ),
             new Region(

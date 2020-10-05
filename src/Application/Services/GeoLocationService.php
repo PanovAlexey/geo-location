@@ -47,7 +47,9 @@ class GeoLocationService
         }
 
         if (!isset($location)) {
-            throw new GeoLocationAppException('An error occurred while executing the program. ' . $exception->getMessage());
+            throw new GeoLocationAppException(
+                'An error occurred while executing the program. ' . $exception->getMessage()
+            );
         }
 
         return $location;

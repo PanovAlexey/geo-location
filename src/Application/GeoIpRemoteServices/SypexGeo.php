@@ -10,7 +10,6 @@ use CodeblogPro\GeoLocationAddress\Location;
 use CodeblogPro\GeoLocationAddress\LocationInterface;
 use CodeblogPro\GeoLocationAddress\Region;
 use GuzzleHttp;
-use Illuminate\Support\Facades\Config;
 
 class SypexGeo extends TemplateOfWorkingWithRemoteServiceApi
 {
@@ -33,8 +32,7 @@ class SypexGeo extends TemplateOfWorkingWithRemoteServiceApi
         $responseContent = $this->getContentFromJson($responseContentJson);
         $coordinates = null;
 
-        if (
-            (isset($responseContent->city->lat) || isset($responseContent->region->lat) || isset($responseContent->country->lat))
+        if ((isset($responseContent->city->lat) || isset($responseContent->region->lat) || isset($responseContent->country->lat))
             && (isset($responseContent->city->lon) || isset($responseContent->region->lon) || isset($responseContent->country->lon))
         ) {
             $coordinates = new Coordinates(
