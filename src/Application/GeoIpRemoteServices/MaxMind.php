@@ -65,8 +65,10 @@ class MaxMind extends TemplateOfWorkingWithRemoteServiceApi
         );
     }
 
-    private function getRegionIsoCodeByCountryIsoCodeAndRegionCode(string $countryIsoCode = '', string $regionCode = ''): string
-    {
+    private function getRegionIsoCodeByCountryIsoCodeAndRegionCode(
+        string $countryIsoCode = '',
+        string $regionCode = ''
+    ): string {
         $regionIsoCode = $countryIsoCode;
 
         if (!empty($regionIsoCode)) {

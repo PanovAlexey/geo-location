@@ -19,7 +19,10 @@ class GeoLocationService
         CurrentIpResolver $currentIpResolver,
         string $languageResultCode
     ): LocationInterface {
-        return $this->getLocationByIpAndLanguageResultCode($currentIpResolver->getCurrentIp()->getValue(), $languageResultCode);
+        return $this->getLocationByIpAndLanguageResultCode(
+            $currentIpResolver->getCurrentIp()->getValue(),
+            $languageResultCode
+        );
     }
 
     public function getLocationArrayByIpAndLanguageResultCode(string $ip, string $languageResultCode = ''): array
@@ -27,9 +30,9 @@ class GeoLocationService
         return $this->getLocationByIpAndLanguageResultCode($ip, $languageResultCode)->toArray();
     }
 
-    public function getLocationByIpAndLanguageResultCode(string $ipString, string $languageResultCode): LocationInterface
+    public function getLocationByIpAndLanguageResultCode(string $ipValue, string $languageResultCode): LocationInterface
     {
-        $ipAddress = new IpAddress($ipString);
+        $ipAddress = new IpAddress($ipValue);
         $language = new Language($languageResultCode);
 
         $sortedServices = (GeoIpRemoteServices::getInstance())->getSortedServices();

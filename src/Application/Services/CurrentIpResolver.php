@@ -16,9 +16,13 @@ class CurrentIpResolver implements CurrentIpResolverInterface
     {
         $ipAddressString = '';
 
-        if (!empty($_SERVER['REMOTE_ADDR']) && $this->isIpValid($remoteAddrIpAddressString = trim($_SERVER['REMOTE_ADDR']))) {
+        if (!empty($_SERVER['REMOTE_ADDR'])
+            && $this->isIpValid($remoteAddrIpAddressString = trim($_SERVER['REMOTE_ADDR']))
+        ) {
             $ipAddressString = $remoteAddrIpAddressString;
-        } elseif (!empty($_SERVER['HTTP_CLIENT_IP']) && $this->isIpValid($httpClientIpAddressString = trim($_SERVER['HTTP_CLIENT_IP']))) {
+        } elseif (!empty($_SERVER['HTTP_CLIENT_IP'])
+            && $this->isIpValid($httpClientIpAddressString = trim($_SERVER['HTTP_CLIENT_IP']))
+        ) {
             $ipAddressString = $httpClientIpAddressString;
         } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])
             && $this->isIpValid($httpForwardedIpAddressString = trim($_SERVER['HTTP_X_FORWARDED_FOR']))
