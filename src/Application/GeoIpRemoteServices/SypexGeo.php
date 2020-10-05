@@ -34,8 +34,9 @@ class SypexGeo extends TemplateOfWorkingWithRemoteServiceApi
         $responseContent = $this->getContentFromJson($responseContentJson);
         $coordinates = null;
 
-        if ((isset($responseContent->city->lat) || isset($responseContent->region->lat) || isset($responseContent->country->lat))
-            && (isset($responseContent->city->lon) || isset($responseContent->region->lon) || isset($responseContent->country->lon))
+        if ((isset($responseContent->city->lat) && isset($responseContent->city->lon))
+            || (isset($responseContent->region->lat) && isset($responseContent->region->lon))
+            || (isset($responseContent->country->lat) && isset($responseContent->country->lon))
         ) {
             $coordinates = new Coordinates(
                 (float)($responseContent->city->lat ?? $responseContent->region->lat ?? $responseContent->country->lat),
