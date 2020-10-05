@@ -3,3 +3,12 @@ parameters:
     paths:
       - src
       - tests
+    excludes_analyse:
+      - src/ServiceProvider.php
+    ignoreErrors:
+      - message: '#Function resolve not found.#'
+        path: src
+      - message: '#Function response not found.#'
+        path: src
+      - message: '#Function Config not found.#'
+        path: src
