@@ -6,7 +6,7 @@ build:
                     -   command: vendor/bin/phpunit --coverage-clover=coverage.clover
                         coverage:
                             file: coverage.clover
-                            format: clover Enable tracking of test coverage in the scrutinizer
+                            format: clover
         analysis:
             project_setup:
                 override: true
