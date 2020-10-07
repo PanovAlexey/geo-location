@@ -2,6 +2,7 @@
 
 namespace CodeblogPro\GeoLocation\Application\Interfaces;
 
+use CodeblogPro\GeoLocation\Application\Models\IpAddress;
 use CodeblogPro\GeoLocationAddress\LocationInterface;
 
 /**
@@ -10,7 +11,14 @@ use CodeblogPro\GeoLocationAddress\LocationInterface;
  */
 interface GeoLocationServiceInterface
 {
-    public function __construct(string $ip, string $language);
+    public function getLocationByIpResolverAndLanguageResultCode(
+        CurrentIpResolverInterface $currentIpResolver,
+        string $languageResultCode
+    ): LocationInterface;
 
-    public function getLocationByIp(): LocationInterface;
+    public function getLocationArrayByIpAndLanguageResultCode(string $ip, string $languageResultCode = ''): array;
+
+    public function getLocationByIpAndLanguageResultCode(string $ip, string $languageResultCode): LocationInterface;
+
+    public function getCurrentIpByIpResolver(CurrentIpResolverInterface $currentIpResolver): IpAddress;
 }

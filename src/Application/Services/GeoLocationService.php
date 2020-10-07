@@ -3,20 +3,21 @@
 namespace CodeblogPro\GeoLocation\Application\Services;
 
 use CodeblogPro\GeoLocation\Application\GeoIpRemoteServices\GeoIpRemoteServices;
+use CodeblogPro\GeoLocation\Application\Interfaces\CurrentIpResolverInterface;
+use CodeblogPro\GeoLocation\Application\Interfaces\GeoLocationServiceInterface;
 use CodeblogPro\GeoLocation\Application\Models\IpAddress;
 use CodeblogPro\GeoLocation\Application\Models\Language;
 use CodeblogPro\GeoLocation\Application\Exceptions\GeoLocationAppException;
-use CodeblogPro\GeoLocation\Application\Services\CurrentIpResolver;
 use CodeblogPro\GeoLocationAddress\LocationInterface;
 
-class GeoLocationService
+class GeoLocationService implements GeoLocationServiceInterface
 {
     public function __construct()
     {
     }
 
     public function getLocationByIpResolverAndLanguageResultCode(
-        CurrentIpResolver $currentIpResolver,
+        CurrentIpResolverInterface $currentIpResolver,
         string $languageResultCode
     ): LocationInterface {
         return $this->getLocationByIpAndLanguageResultCode(
@@ -30,9 +31,9 @@ class GeoLocationService
         return $this->getLocationByIpAndLanguageResultCode($ip, $languageResultCode)->toArray();
     }
 
-    public function getLocationByIpAndLanguageResultCode(string $ipValue, string $languageResultCode): LocationInterface
+    public function getLocationByIpAndLanguageResultCode(string $ip, string $languageResultCode): LocationInterface
     {
-        $ipAddress = new IpAddress($ipValue);
+        $ipAddress = new IpAddress($ip);
         $language = new Language($languageResultCode);
 
         $sortedServices = (GeoIpRemoteServices::getInstance())->getSortedServices();
@@ -58,7 +59,7 @@ class GeoLocationService
         return $location;
     }
 
-    public function getCurrentIpByIpResolver(CurrentIpResolver $currentIpResolver): IpAddress
+    public function getCurrentIpByIpResolver(CurrentIpResolverInterface $currentIpResolver): IpAddress
     {
         return $currentIpResolver->getCurrentIp();
     }
