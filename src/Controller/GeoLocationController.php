@@ -19,7 +19,7 @@ class GeoLocationController extends Controller
         $geoLocationService = resolve(GeoLocationService::class);
 
         try {
-            $result = ['data' => $geoLocationService->getLocationArrayByIp($ip, $language)];
+            $result = ['data' => $geoLocationService->getLocationArrayByIpAndLanguageResultCode($ip, $language)];
         } catch (IncorrectIpException $exception) {
             $result = ['error' => 'Incorect ip.' . $exception->getMessage()];
 
