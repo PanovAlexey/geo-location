@@ -24,6 +24,7 @@ $ composer require codeblog.pro/geo-location
 ## Usage
 
 ``` php
+// First way: in code
 $geoLocationService = new \CodeblogPro\GeoLocation\Application\Services\GeoLocationService();
 $location = $geoLocationService->getLocationByIpAndLanguageResultCode('8.8.8.8', 'EN');
 var_dump($location);
@@ -40,6 +41,23 @@ $locationByIpResolverAndLanguageResultCode = $geoLocationService->getLocationByI
     'RU'
 );
 var_dump($locationByIpResolverAndLanguageResultCode);
+
+// Second way (only for Laravel): using a GET request, 
+// for example by url http://<our-domain>/api/geo-location/46.174.50.30/en
+// Result: 
+// {
+//   "data":{
+//     "latitude":55.07944,
+//     "longitude":38.77833,
+//     "country_name":"Russia",
+//     "country_code":"RU",
+//     "region_name":"Moskovskaya Oblast'",
+//     "region_code":"RU-MOS",
+//     "street_name":"",
+//     "postal_code":"1404xx",
+//     "locality":"Kolomna"
+//   }
+// }
 ```
 
 ## Testing
